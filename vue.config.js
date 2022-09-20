@@ -35,6 +35,15 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
+    },
+    // Configuring a reverse proxy
+    proxy: {
+      '/api': {
+        // proxy server address
+        target: 'http://ihrm-java.itheima.net/',
+        // true: open the cross-domain
+        changeOrigin: true
+      }
     }
     // before: require('./mock/mock-server.js')
   },
