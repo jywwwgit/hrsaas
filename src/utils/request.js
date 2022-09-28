@@ -1,11 +1,21 @@
 import axios from 'axios'
+import store from '@/store'
 import { Message } from 'element-ui'
 const service  = axios.create({ // create an instance of Axios
   // npm run dev , cross-domain proxy
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000 // 5s timeout
 })
-service.interceptors.request.use() // Request interceptor
+// Request interceptor
+service.interceptors.request.use(config => {
+  if (store.getters.token) { // have a token, inject token
+    config.headers['Authorization'] = `Bearer ${store.getters.token}`
+  }
+  // must return config
+  return config
+}, error => {
+  return new Promise.reject(error)
+})
  // Response interceptor
 service.interceptors.response.use(response => {
   const { success, message, data } = response.data
