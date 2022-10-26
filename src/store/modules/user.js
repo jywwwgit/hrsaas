@@ -1,5 +1,5 @@
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login, getUserInfo } from '@/api/user'
+import { getToken, setToken, removeToken, setTimeStamp } from '@/utils/auth'
+import { login, getUserInfo, getUserDedailById } from '@/api/user'
 
 // state
 const state = {
@@ -33,15 +33,27 @@ const actions = {
     // After the response interceptor,result === token
     const result = await login(data)
     // axios modify state must pass mutation
+    console.log(result)
     context.commit('setToken', result)
+    // 登录成功，写入时间戳
+    setTimeStamp()
   },
   // get User information action
   async getUserInfo(context) {
     const result = await getUserInfo() // get return value
+    const baseInfo = await getUserDedailById(result.userId)
+    const baseResult = { ...result, ...baseInfo }
     // 修改 state 里面的值，必须通过 mutation
     console.log(result)
-    context.commit('setUserInfo', result)
-    return result
+    context.commit('setUserInfo', baseResult)
+    return baseResult
+  },
+  // 退出登录
+  logout(context) {
+    // 删除token
+    context.commit('removeToken')
+    // 删除用户资料
+    context.commit('removeUserInfo')
   }
 }
 
