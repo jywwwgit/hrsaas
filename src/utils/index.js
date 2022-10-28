@@ -115,3 +115,21 @@ export function param2Obj(url) {
   })
   return obj
 }
+
+/**
+ * 将列表形的数据转化为树形数据
+ */
+export function tranListToTreeData(list, rootValue) {
+  var arr = []
+  list.forEach(item => {
+    if (item.pid === rootValue) {
+      // 找到之后，就要去找 item 下面有没有子节点
+      const children = tranListToTreeData(list, item.id)
+      if (children.length > 0) {
+        item.children = children
+      }
+      arr.push(item) // 将数组添加到数组中
+    }
+  })
+  return arr
+}

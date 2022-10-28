@@ -33,7 +33,7 @@ const actions = {
     // After the response interceptor,result === token
     const result = await login(data)
     // axios modify state must pass mutation
-    console.log(result)
+    // console.log(result)
     context.commit('setToken', result)
     // 登录成功，写入时间戳
     setTimeStamp()
@@ -44,7 +44,7 @@ const actions = {
     const baseInfo = await getUserDedailById(result.userId)
     const baseResult = { ...result, ...baseInfo }
     // 修改 state 里面的值，必须通过 mutation
-    console.log(result)
+    // console.log(result)
     context.commit('setUserInfo', baseResult)
     return baseResult
   },

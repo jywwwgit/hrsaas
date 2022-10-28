@@ -1,14 +1,22 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">name: {{ name }}</div>
+    <page-tools :showBefore="true">
+      <span slot="before">nihassssssssssssso</span>
+      <el-button size="small" type="primary" slot="after">导入excle</el-button>
+    </page-tools>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import PageTools from '@/components/PageTools'
 
 export default {
   name: 'Dashboard',
+  components: {
+    PageTools
+  },
   computed: {
     ...mapGetters([
       'name'

@@ -3,7 +3,7 @@ import Layout from '@/layout'
 
 export default {
   path: '/approvals', // 路径
-  name: 'approvals', // 给路由规则加一个name
+  // name: 'approvals', // 给路由规则加一个name
   component: Layout, // 组件
   // 配置二级的路由表
   children: [{

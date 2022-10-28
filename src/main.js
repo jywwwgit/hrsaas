@@ -13,6 +13,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 import './permission'
+import Components from '@/components'
 
 import '@/icons' // icon
 // import '@/permission' // permission control
@@ -29,7 +30,7 @@ import '@/icons' // icon
 //   const { mockXHR } = require('../mock')
 //   mockXHR()
 // }
-console.log(Object.keys(directive))
+// console.log(Object.keys(directive))
 // 注册自定义指令
 // 遍历所有的导出的对象，完成自定义全局注册
 Object.keys(directive).forEach(key => {
@@ -41,6 +42,8 @@ Object.keys(directive).forEach(key => {
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
+
+Vue.use(Components) // 注册自己的插件
 
 Vue.config.productionTip = false
 
