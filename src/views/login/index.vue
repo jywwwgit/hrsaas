@@ -87,8 +87,8 @@ export default {
           { validator: validateMobile, trigger: 'blur' }
         ],
         password: [
-          { required: true, trigger: 'blur', message: '密码不能为空'},
-          { min: 6, max: 16, message: '密码的长度在6-16位之间', trigger: 'blur'}
+          { required: true, trigger: 'blur', message: '密码不能为空' },
+          { min: 6, max: 16, message: '密码的长度在6-16位之间', trigger: 'blur' }
         ]
       },
       loading: false,
@@ -180,7 +180,7 @@ $cursor: #fff;
 
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.7); // the background color of input form 
+    background: rgba(255, 255, 255, 0.7); // the background color of input form
     border-radius: 5px;
     color: #454545;
   }

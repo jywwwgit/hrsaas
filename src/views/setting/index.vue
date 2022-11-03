@@ -9,15 +9,15 @@
               <el-button type="primary" size="small" icon="el-icon-plus" @click="showDialog = true">新增角色</el-button>
             </el-row>
             <el-table border="" :data="list">
-              <el-table-column align="center" type="index" label="序号" width="120"></el-table-column>
-              <el-table-column align="center" prop="name" label="角色名称" width="240"></el-table-column>
-              <el-table-column align="center" prop="description" label="描述"></el-table-column>
+              <el-table-column align="center" type="index" label="序号" width="120" />
+              <el-table-column align="center" prop="name" label="角色名称" width="240" />
+              <el-table-column align="center" prop="description" label="描述" />
               <el-table-column align="center" label="操作">
                 <!-- 作用域插槽 -->
                 <template slot-scope="{ row }">
                   <el-button size="small" type="success">分配权限</el-button>
                   <el-button size="small" type="primary" @click="editRole(row.id)">编辑</el-button>
-                  <el-button size="small" type="danger" @click="deleteRole(row.id)" >删除</el-button>
+                  <el-button size="small" type="danger" @click="deleteRole(row.id)">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -39,20 +39,20 @@
               show-icon
               :closable="false"
             />
-              <el-form label-width="120px" style="margin-top:50px">
-                <el-form-item label="公司名称">
-                  <el-input disabled style="width:400px" v-model="formData.name" />
-                </el-form-item>
-                <el-form-item label="公司地址">
-                  <el-input disabled style="width:400px" v-model="formData.companyAddress" />
-                </el-form-item>
-                <el-form-item label="邮箱">
-                  <el-input disabled style="width:400px" v-model="formData.mailbox" />
-                </el-form-item>
-                <el-form-item label="备注">
-                  <el-input type="textarea" :rows="3" disabled style="width:400px" v-model="formData.remarks" />
-                </el-form-item>
-              </el-form>
+            <el-form label-width="120px" style="margin-top:50px">
+              <el-form-item label="公司名称">
+                <el-input v-model="formData.name" disabled style="width:400px" />
+              </el-form-item>
+              <el-form-item label="公司地址">
+                <el-input v-model="formData.companyAddress" disabled style="width:400px" />
+              </el-form-item>
+              <el-form-item label="邮箱">
+                <el-input v-model="formData.mailbox" disabled style="width:400px" />
+              </el-form-item>
+              <el-form-item label="备注">
+                <el-input v-model="formData.remarks" type="textarea" :rows="3" disabled style="width:400px" />
+              </el-form-item>
+            </el-form>
           </el-tab-pane>
         </el-tabs>
       </el-card>
@@ -98,16 +98,16 @@ export default {
       // 专门接收新增或者编辑的编辑的表单数据
       roleForm: {},
       rules: {
-        name: [{ required: true, message: '角色名称不能为空', trigger: 'blur'}]
+        name: [{ required: true, message: '角色名称不能为空', trigger: 'blur' }]
       }
     }
   },
-  created() {
-    this.getRoleList(), // 获取角色列表
-    this.getCompanyInfo()
-  },
   computed: {
     ...mapGetters(['companyId'])
+  },
+  created() {
+    this.getRoleList() // 获取角色列表
+    this.getCompanyInfo()
   },
   methods: {
     async getRoleList() {
