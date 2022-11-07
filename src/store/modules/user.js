@@ -1,5 +1,5 @@
 import { getToken, setToken, removeToken, setTimeStamp } from '@/utils/auth'
-import { login, getUserInfo, getUserDedailById } from '@/api/user'
+import { login, getUserInfo, getUserDetailById } from '@/api/user'
 
 // state
 const state = {
@@ -41,7 +41,7 @@ const actions = {
   // get User information action
   async getUserInfo(context) {
     const result = await getUserInfo() // get return value
-    const baseInfo = await getUserDedailById(result.userId)
+    const baseInfo = await getUserDetailById(result.userId)
     const baseResult = { ...result, ...baseInfo }
     // 修改 state 里面的值，必须通过 mutation
     // console.log(result)

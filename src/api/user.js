@@ -20,7 +20,7 @@ export function getUserInfo() {
 /**
  *获取用户的基本信息，todo 显示头像 
 */
-export function getUserDedailById(id) {
+export function getUserDetailById(id) {
   return request({
     url: `/sys/user/${id}`
   })
