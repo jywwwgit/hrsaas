@@ -12,5 +12,8 @@ export const imageerror = {
       // 当图片异常的时候，将指令配置的默认图片设置为该图片的内容
       dom.src = options.value
     }
+  },
+  componentUpdated(dom, options) {
+    dom.src = dom.src || options.value
   }
 }

@@ -9,6 +9,12 @@
     <!-- <breadcrumb class="breadcrumb-container" /> -->
 
     <div class="right-menu">
+      <!-- 放置切换多语言 -->
+      <lang-select class="right-menu-item" />
+      <!-- 放置切换主题组件 -->
+      <theme-picker class="right-menu-item" />
+      <!-- 放置切换全屏插件 -->
+      <screen-full class="right-menu-item" />
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img v-imageerror="defaultImg" :src="staffPhoto" class="user-avatar">
@@ -170,6 +176,9 @@ export default {
     vertical-align: middle;
     margin-left:5px;
    }
+  .right-menu-item {
+    vertical-align: middle;
+  }
    .user-dropdown {
       color: #fff;
     }

@@ -58,7 +58,7 @@
         <el-col :span="12">
           <el-form-item label="员工头像">
             <!-- 放置上传图片 -->
-           
+            <image-upload ref="staffPhoto" />
           </el-form-item>
         </el-col>
       </el-row>
@@ -90,6 +90,7 @@
 
         <el-form-item label="员工照片">
           <!-- 放置上传图片 -->
+          <image-upload ref="myStaffPhoto" />
         </el-form-item>
         <el-form-item label="国家/地区">
           <el-select v-model="formData.nationalArea" class="inputW2">
@@ -365,19 +366,39 @@ export default {
     // 获取用户的基本信息
     async getUserDetailById() {
       this.userInfo = await getUserDetailById(this.userId)
+      if (this.userInfo.staffPhoto && this.userInfo.staffPhoto.trim()) {
+        this.$refs.staffPhoto.fileList = [{ url: this.userInfo.staffPhoto, upload: true}]
+      }
     },
     // 获取用户的详细信息
     async getPersonalDetail() {
       this.formData = await getPersonalDetail(this.userId)
+      if (this.formData.staffPhoto && this.formData.staffPhoto.trim()) {
+        this.$refs.myStaffPhoto.fileList = [{ url: this.formData.staffPhoto, upload: true}]
+      }
     },
     // 保存员工个人信息
     async saveUser() {
-      await saveUserDetailById(this.userInfo)
+      // 去读取员工上传的头像
+      const fileList = this.$refs.staffPhoto.fileList // 读取上传时组件的数据
+      if (fileList.some(item => !item.upload)) {
+        // 找upload为false的图片，找到了说明图片尚未上传完成
+        this.$message.warning('您当前还有图片未上传完成')
+        return
+      }
+      // 通过合并 得到一个新对象
+      await saveUserDetailById({ ...this.userInfo, staffPhoto: fileList && fileList.length ? fileList[0].url : ' '})
       this.$message.success('保存个人信息成功')
     },
     // 更新用户详情的基础信息
     async savePersonal() {
-      await updatePersonal(this.formData)
+      const fileList = this.$refs.myStaffPhoto.fileList // 读取上传时组件的数据
+      if (fileList.some(item => !item.upload)) {
+        // 找upload为false的图片，找到了说明图片尚未上传完成
+        this.$message.warning('您当前还有图片未上传完成')
+        return
+      }
+      await updatePersonal({ ...this.formData, staffPhoto: fileList.length ? fileList[0].url : ' '})
       this.$message.success('更新用户信息成功')
     }
   }
