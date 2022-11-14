@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
-dist/
+# gitignore文件里注释用 “#” 
+# dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
